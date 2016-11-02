@@ -30,7 +30,20 @@ class Padlock_Deactivator {
 	 * @since    1.0.0
 	 */
 	public static function deactivate() {
+		Padlock_Deactivator::dropAuthAssignmentTable();
+		Padlock_Deactivator::dropAuthRuleTable();
+	}
 
+	private static function dropAuthAssignmentTable(){
+		global $wpdb;
+		$table_name = $wpdb->prefix . "padlock_auth_assignment";
+		$wpdb->query("DROP TABLE IF EXISTS $table_name");
+	}
+
+	private static function dropAuthRuleTable(){
+		global $wpdb;
+		$table_name = $wpdb->prefix . "padlock_auth_rule";
+		$wpdb->query("DROP TABLE IF EXISTS $table_name");
 	}
 
 }
